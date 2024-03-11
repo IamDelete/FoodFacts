@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import login,authenticate
-from .forms import SignupForm,UserLoginForm
+from .forms import SignupForm,UserLoginForm,FoodForm
+from .models import food
 
 
 def signup(request):
@@ -31,3 +32,23 @@ def user_login(request):
     else:
         form = UserLoginForm
     return render(request,'maineapp/login.html',{'form':form})
+
+def add_food(request):
+    if request.method=='POST':
+        form = FoodForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('food:food_add_success')
+    else:
+        form = FoodForm()
+    return render(request, 'maineapp/AddFood.html', {'form': form})
+
+
+def food_add_success(request):
+    return render(request, 'maineapp/food_add_success.html')
+
+
+def display_food(request):
+    elements = food.objects.all().order_by('name')
+    return render(request, 'maineapp/foodcatalog.html', {'elements': elements})
+
