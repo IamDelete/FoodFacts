@@ -1,17 +1,22 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import get_user_model
 from .models import food
 
 class SignupForm(UserCreationForm):
-    email = forms.EmailField(max_length=200, help_text='Required')
-    widgets = {
-            'field_name': forms.TextInput(attrs={'class': 'formInput'}),
-    }
-
+    email = forms.EmailField(max_length=200, help_text='')
+    password1 = forms.CharField(widget=forms.PasswordInput, help_text='')  # Optionally hide password input
+    password2 = forms.CharField(widget=forms.PasswordInput, help_text='')
+    
     class Meta:
         model = get_user_model()
         fields = ('username', 'email', 'password1', 'password2')
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'formInput'}),
+            'email': forms.EmailInput(attrs={'class': 'formInput'}),
+            'password1': forms.PasswordInput(attrs={'class': 'formInput'}),
+            'password2': forms.PasswordInput(attrs={'class': 'formInput'})
+        }
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -29,7 +34,8 @@ class UserLoginForm(AuthenticationForm):
     class Meta:
         fields = ['username', 'password']
         widgets = {
-            'field_name': forms.TextInput(attrs={'class': 'formInput'}),
+            'username': forms.TextInput(attrs={'class': 'formInput'}),
+            'password': forms.PasswordInput(attrs={'class': 'formInput'}),
         }
 
 class FoodForm(forms.ModelForm):
