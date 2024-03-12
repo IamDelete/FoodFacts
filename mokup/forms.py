@@ -5,6 +5,9 @@ from .models import food
 
 class SignupForm(UserCreationForm):
     email = forms.EmailField(max_length=200, help_text='Required')
+    widgets = {
+            'field_name': forms.TextInput(attrs={'class': 'formInput'}),
+    }
 
     class Meta:
         model = get_user_model()
@@ -25,6 +28,9 @@ class SignupForm(UserCreationForm):
 class UserLoginForm(AuthenticationForm):
     class Meta:
         fields = ['username', 'password']
+        widgets = {
+            'field_name': forms.TextInput(attrs={'class': 'formInput'}),
+        }
 
 class FoodForm(forms.ModelForm):
     class Meta:
