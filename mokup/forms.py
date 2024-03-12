@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth import get_user_model
+from .models import food
 
 class SignupForm(UserCreationForm):
     email = forms.EmailField(max_length=200, help_text='Required')
@@ -24,3 +25,8 @@ class SignupForm(UserCreationForm):
 class UserLoginForm(AuthenticationForm):
     class Meta:
         fields = ['username', 'password']
+
+class FoodForm(forms.ModelForm):
+    class Meta:
+        model = food
+        fields = ['name', 'desc', 'category', 'kcal', 'proteins', 'fats', 'carbs']

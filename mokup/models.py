@@ -30,8 +30,11 @@ class MyUser(AbstractUser):
 
 class food(models.Model):
     name = models.CharField(max_length = 150)
-    desc = models.CharField(max_length= 500)
+    desc = models.TextField()
+    category = models.CharField(max_length = 100)
     kcal= models.IntegerField()
-    pro = models.IntegerField()
+    proteins = models.IntegerField()
     fats = models.IntegerField()
     carbs = models.IntegerField()
+    def __str__(self):
+        return self.name
