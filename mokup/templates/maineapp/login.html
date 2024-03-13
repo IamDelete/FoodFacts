@@ -25,7 +25,7 @@
   <main>
     <h2>WELCOME BACK</h2>
     <div id="formContainer">
-      <form method="post">
+      <form method="post" id="form">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Login</button>
@@ -79,9 +79,21 @@ body, html {
       padding: 0;
   }
   
-  form label {
+  label {
       font-family: 'Roboto';
       font-size: 5vw;
+  }
+
+  #id_username, #id_password {
+    font-family: 'Roboto';
+    width: 50vw;
+    height: 6vw;
+    border-radius: 2vw;
+    border: none;
+    background-color: #c0cada;
+    text-align: center;
+    font-size: 3.5vw;
+    margin-bottom: 5vw;
   }
   
   form #buttonWrapper {
@@ -102,11 +114,15 @@ body, html {
       color: white;
   }
 
-  form {
+  form, #form, #formContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+  }
+
+  form p {
+    width: 50vw;
   }
   
   a {

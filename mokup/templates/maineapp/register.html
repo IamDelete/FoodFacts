@@ -24,11 +24,13 @@
   <main>
     <h2>JOIN US</h2>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Sign up</button>
-    </form>
+    <div id="formContainer">
+      <form method="post" id="form">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit">Sign up</button>
+      </form>
+    </div>
   </main>
 </body>
 </html>
@@ -79,6 +81,22 @@ body, html {
       font-family: 'Roboto';
       font-size: 5vw;
   }
+
+  #id_username, #id_password1, #id_password2, #id_email {
+    font-family: 'Roboto';
+    width: 50vw;
+    height: 6vw;
+    border-radius: 2vw;
+    border: none;
+    background-color: #c0cada;
+    text-align: center;
+    font-size: 3.5vw;
+    margin-bottom: 5vw;
+  }
+
+  .helptext {
+    display: none;
+  }
   
   form #buttonWrapper {
       display: flex;
@@ -96,13 +114,19 @@ body, html {
       font-family: 'Baloo Thambi';
       font-size: 4vw;
       color: white;
+      margin-top: 2vh;
   }
 
-  form {
+  form, #form, #formContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+  }
+
+  form p {
+    width: 50vw;
+    height: 5vh;
   }
   
   a {
